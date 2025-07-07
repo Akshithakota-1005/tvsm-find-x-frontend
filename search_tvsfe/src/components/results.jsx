@@ -290,6 +290,8 @@ function Results() {
                     <p style={textStyle}><strong>Weight:</strong> {item.weight ? `${item.weight} kg` : "N/A"}</p>
                     <p style={textStyle}><strong>Category:</strong> {item.category || "N/A"}</p>
                     <p style={textStyle}><strong>Industry:</strong> {item.industry || "N/A"}</p>
+                    <p style={textStyle}><strong>Location:</strong> {item.name || "N/A"}</p>
+                    <p style={textStyle}><strong>Price:</strong> {item.price || "N/A"}</p>
                     <p style={textStyle}><strong>Score:</strong> {item._score ? item._score.toFixed(2) : "N/A"}</p>
                   </div>
                 </a>
