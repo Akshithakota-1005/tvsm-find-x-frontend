@@ -1,19 +1,23 @@
 
-
-
-
-
-
-
-
-
-
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Results from "./components/results";
 import SearchBar from "./components/searchbar";
 
 function App() {
+  useEffect(() => {
+    
+   fetch("http://localhost:8000/get-token")
+      .then((res) => res.json())
+      .then((data) => {
+        sessionStorage.setItem("token", data.token);
+        console.log("Token stored in sessionStorage");
+      })
+      .catch((err) => {
+        console.error("Failed to fetch token:", err);
+      });
+  }, []);
   return (
     <Router>
       <div
@@ -21,7 +25,7 @@ function App() {
           display: "flex",
           flexDirection: "column",
            width: "100vw",
-          minHeight: "100vh", // 🔥 Make full height of the viewport
+          minHeight: "100vh", 
         }}
       >
         {/* Sticky Header */}
@@ -41,7 +45,7 @@ function App() {
             rowGap: "12px",
           }}
         >
-          {/* Logo and Left Nav Links */}
+          
           <div
             style={{
               display: "flex",
@@ -63,7 +67,7 @@ function App() {
             <span style={{ cursor: "pointer", whiteSpace: "nowrap" }}>Company</span>
           </div>
 
-          {/* Center Search Bar */}
+          
           <div
             style={{
               flex: 1,
@@ -76,7 +80,7 @@ function App() {
             <SearchBar />
           </div>
 
-          {/* Right Nav Links */}
+      
           <div
             style={{
               display: "flex",
@@ -97,11 +101,11 @@ function App() {
           </div>
         </header>
 
-        {/* Main Content Area */}
+        
         <main
           style={{
-            flex: 1, // 🔥 This fills remaining vertical space
-            overflow: "auto", // adds scroll if content overflows
+            flex: 1, 
+            overflow: "auto", 
             backgroundColor: "#f9f9f9",
           }}
         >

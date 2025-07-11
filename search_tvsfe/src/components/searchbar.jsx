@@ -8,15 +8,23 @@ function SearchBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
+
+   
     const fetchSuggestions = async () => {
       if (searchTerm.trim() === "") {
         setSuggestions([]);
         return;
       }
+      const token = sessionStorage.getItem("token"); 
+    if (!token) {
+      console.warn("No token found in sessionStorage");
+      return;
+    }
       try {
         const response = await fetch("http://localhost:8000/suggestions", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, },
           body: JSON.stringify({ prefix: searchTerm }),
         });
         const data = await response.json();
